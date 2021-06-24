@@ -69,7 +69,7 @@ public class ClientControllerIT {
 			.bodyValue(clientDto)
 			.exchange()
 			.expectStatus()
-			.isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+			.isEqualTo(HttpStatus.BAD_REQUEST);
 			
 	}
 	
