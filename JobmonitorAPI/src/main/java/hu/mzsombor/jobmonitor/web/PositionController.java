@@ -1,6 +1,9 @@
 package hu.mzsombor.jobmonitor.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,5 +50,14 @@ public class PositionController {
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 		return positionMapper.positionToPositionResultDto(
 				positionService.getPosition(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
+	}
+	
+	@GetMapping
+	public List<PositionResultDto> searchPositions(@RequestParam(required = false) @Size(max = 50) String title,
+			@RequestParam(required = false) @Size(max = 50) String location,
+			@RequestParam String apiKey) {
+		if (!clientService.isUuidExists(apiKey))
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+		return positionMapper.positionsToPositionResultDtos(positionService.search(title, location));
 	}
 }
