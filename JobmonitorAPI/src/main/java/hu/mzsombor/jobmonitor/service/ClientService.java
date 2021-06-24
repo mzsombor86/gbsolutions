@@ -25,4 +25,8 @@ public class ClientService {
 		return clientRepository.save(client);
 	}
 
+	public boolean isUuidExists(String uuid) {
+		return !clientRepository.findByUuid(uuid).isEmpty();
+	}
+
 }

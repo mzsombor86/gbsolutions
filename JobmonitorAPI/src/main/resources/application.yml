@@ -1,3 +1,5 @@
+jobmonitor:
+  baseUrl: http://localhost:8080
 
 spring:
   jpa:
