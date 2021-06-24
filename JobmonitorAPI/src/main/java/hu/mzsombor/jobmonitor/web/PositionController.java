@@ -34,18 +34,18 @@ public class PositionController {
 	@Autowired
 	PositionMapper positionMapper;
 
-	
 	@PostMapping
 	public String addPosition(@RequestBody @Valid PositionPushDto positionDto, @RequestParam String apiKey) {
 		if (!clientService.isUuidExists(apiKey))
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 		return positionService.addNewPosition(positionMapper.positionPushDtoToPosition(positionDto)).getUrl();
 	}
-	
+
 	@GetMapping("/{id}")
 	public PositionResultDto getPosition(@PathVariable long id, @RequestParam String apiKey) {
 		if (!clientService.isUuidExists(apiKey))
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-		return positionMapper.positionToPositionResultDto(positionService.getPosition(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
+		return positionMapper.positionToPositionResultDto(
+				positionService.getPosition(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
 	}
 }
