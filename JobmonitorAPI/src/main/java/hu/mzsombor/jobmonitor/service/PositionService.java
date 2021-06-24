@@ -1,5 +1,7 @@
 package hu.mzsombor.jobmonitor.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,10 @@ public class PositionService {
 		Position newPosition = positionRepository.save(position);
 		newPosition.setUrl(config.getBaseUrl() + "/positions/" + newPosition.getId());
 		return newPosition;
+	}
+	
+	public Optional<Position> getPosition(long id) {
+		return positionRepository.findById(id);
 	}
 
 }
