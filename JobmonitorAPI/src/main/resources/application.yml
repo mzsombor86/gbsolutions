@@ -1,5 +1,7 @@
 jobmonitor:
   baseUrl: http://localhost:8080
+  externalApiKey: a70bf2be-432b-4273-9470-32976097bfab
+  externalApiUrl: https://www.reed.co.uk/api/1.0/search
 
 spring:
   jpa:
